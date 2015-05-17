@@ -2,12 +2,12 @@ package types
 
 
 type ValidFileType interface {
-	GetHeaderBytesSignature() []byte
-	GetMinHeaderSize() uint
+	HeaderBytesSignature() []byte
+	HeaderSize() uint8
 }
 
 
 
-func GetSignature(v ValidFileType) []byte{
-	return v.GetHeaderBytesSignature()
+func Signature(v ValidFileType) []byte{
+	return v.HeaderBytesSignature()
 }

@@ -1,8 +1,8 @@
-package bytescontentvalidator
+package magic
 import (
 	"testing"
 	"io/ioutil"
-	"github.com/samcrosoft/bytescontentvalidator/types/images"
+	"github.com/samcrosoft/magic/types"
 	"path/filepath"
 )
 
@@ -10,7 +10,7 @@ import (
 func TestPngData(t *testing.T){
 	sImagePath := "./corpus/image/png-sample.png"
 	if oBytes, err := ioutil.ReadFile(sImagePath); err == nil{
-		oType := &images.PngType{}
+		oType := types.PNGType{}
 		if bValid, oErr := IsBytesContentAValidType(oBytes, oType); bValid == false{
 			if oErr != nil{
 				t.Error("Image Has Less Than The Required Header Bytes")
@@ -21,11 +21,11 @@ func TestPngData(t *testing.T){
 
 
 // this will test the jpeg file
-func TestInvalidPngData(t *testing.T){
+func TestJpegData(t *testing.T){
 	sImagePath := "./corpus/image/jpeg-sample.jpg"
 	sImagePath,_ = filepath.Abs(sImagePath)
 	if oBytes, err := ioutil.ReadFile(sImagePath); err == nil{
-		if bValid, oErr := IsBytesContentAValidType(oBytes, &images.JpegType{}); bValid == false{
+		if bValid, oErr := IsBytesContentAValidType(oBytes, &types.JPEGType{}); bValid == false{
 			if oErr != nil{
 				t.Error("Image Has Less Than The Required Header Bytes")
 			}else{
